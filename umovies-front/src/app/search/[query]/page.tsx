@@ -14,11 +14,14 @@ export default function Search() {
   const params = useParams<{ query: string }>();
   const { query } =params;
 
+  console.log("query"+ query)
+
   interface Movies {
     id: number;
     title: string;
     poster_path: string;
     }
+
     const [movies, setMovies] = useState<Movies[]>([]);
 
     async function fetchInfo() {
@@ -49,6 +52,7 @@ export default function Search() {
                                       className="object-cover rounded-xl d-flex"
                                       src={`${BASE_IMG_URL}${item.poster_path}`}
                                       width={270}
+                                      height={270}
                                   />
                               </CardBody>
                               <CardFooter className="pb-0 pt-2 px-4 flex-col items-center justify-center d-flex">

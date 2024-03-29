@@ -30,6 +30,8 @@ export async function getMovieInfo(id: number) {
 }
 export async function getSearchMovies(query: string) {
   try {
+    console.log(SEARCH)
+    console.log(query)
     const response = await axios.get(`${SEARCH}${query}&api_key=${process.env.api_key}`);
     const info = response.data.results;
     return info

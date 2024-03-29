@@ -41,6 +41,7 @@ export default function Trending() {
                                         className="object-cover rounded-xl d-flex"
                                         src={`${BASE_IMG_URL}${item.poster_path}`}
                                         width={270}
+                                        height={270}
                                     />
                                 </CardBody>
                                 <CardFooter className="pb-0 pt-2 px-4 flex-col items-center justify-center d-flex">
