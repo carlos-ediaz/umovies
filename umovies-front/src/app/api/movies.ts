@@ -1,5 +1,5 @@
 import axios from "axios";
-import { TRENDING } from "./constants";
+import { SEARCH, TRENDING } from "./constants";
 import { MOVIE } from "./constants";
 
 export async function getTrendMovies() {
@@ -14,7 +14,6 @@ export async function getTrendMovies() {
   } catch (error) {
     return Promise.reject(error)
   }
-  
 }
 export async function getMovieInfo(id: number) {
   try {
@@ -28,5 +27,13 @@ export async function getMovieInfo(id: number) {
   } catch (error) {
     return Promise.reject(error)
   }
-  
+}
+export async function getSearchMovies(query: string) {
+  try {
+    const response = await axios.get(`${SEARCH}${query}&api_key=${process.env.api_key}`);
+    const info = response.data.results;
+    return info
+  } catch (error) {
+    return Promise.reject(error)
+  }
 }

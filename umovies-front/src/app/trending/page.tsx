@@ -3,9 +3,8 @@
 import React, { useEffect, useState } from 'react'
 import { getTrendMovies } from '../api/movies'
 import { BASE_IMG_URL } from '../api/constants';
-import axios from "axios";
 import {Card, CardHeader, CardBody, Image, CardFooter} from "@nextui-org/react";
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface Movies {
     id: number;
@@ -13,7 +12,7 @@ interface Movies {
     poster_path: string;
 }
 export default function Trending() {
-    
+    const router = useRouter();
     const [movies, setMovies] = useState<Movies[]>([]);
 
     useEffect(() => {
@@ -35,13 +34,12 @@ export default function Trending() {
                 <h4 className="font-bold text-large mb-6">Trending Now</h4>
                 <div className="gap-2 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 d-flex justify-center">
                     {movies.map((item, index) => (
-                        <Link key={index} href={`/movie/${item.id}`}>
-                            <Card  className="py-4 d-flex justify-center items-center justify-center" isPressable onPress={() => console.log(item.id)}>
+                            <Card key={index} className="py-4 d-flex justify-center items-center justify-center" isPressable onPress={() => router.push(`/movie/${item.id}`)}>
                                 <CardBody className="overflow-visible py-2 d-flex justify-center items-center">
                                     <Image
                                         alt="Card background"
                                         className="object-cover rounded-xl d-flex"
-                                        src={`${BASE_IMG_URL}/${item.poster_path}`}
+                                        src={`${BASE_IMG_URL}${item.poster_path}`}
                                         width={270}
                                     />
                                 </CardBody>
@@ -49,8 +47,6 @@ export default function Trending() {
                                     <h4 className="font-bold text-large d-flex">{item.title}</h4>
                                 </CardFooter>
                             </Card>
-                        </Link>
-                    
                     ))}
                 </div>
             </div>

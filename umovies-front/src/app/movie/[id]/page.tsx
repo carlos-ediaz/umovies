@@ -45,7 +45,7 @@ export default function Movie() {
     if (movie) {
       return (
         <Card className="py-4 d-flex flex-row">
-          <CardBody className="overflow-visible py-2 d-flex justify-center items-center justify-center">
+          <CardBody className="overflow-visible py-2 d-flex justify-start items-center">
             <Image
               alt="Card background"
               className="object-cover rounded-xl"
@@ -59,7 +59,7 @@ export default function Movie() {
               <h4 className="font-bold text-large">{movie.title}</h4>
             </Link>
             <p className="text-tiny">Adult: {movie.adult? "Yes": "No"}</p>
-            <p className="text-base">
+            <p className="text-tiny">
               <strong>Synopsis: </strong>
               {movie.overview}
               </p>
@@ -69,7 +69,7 @@ export default function Movie() {
             <p className="text-tiny">Genres:</p>
             {
               movie.genres.map((genre, index) => (
-                <Chip className="mr-2" key={index}>{genre.name}</Chip>
+                <Chip className="mr-1 mb-1" key={index}>{genre.name}</Chip>
               ))
             }
             </div>
