@@ -1,10 +1,19 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import {Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, NavbarContent, NavbarItem, Link, Button, Input} from "@nextui-org/react";
 import { SearchIcon } from "./SearchIcon";
+import { useRouter } from "next/navigation";
 
-export default function App() {
+export default function NavigationBar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [input, setInput] = useState("");
+  const router = useRouter()
+
+  const handleSubmit = (e:React.FormEvent) => {
+    e.preventDefault();
+    setInput("");
+    router.push(`/search/${input}?page=1`)
+  }
 
   const menuItems = [
     "Home",
@@ -19,18 +28,23 @@ export default function App() {
     >
       <NavbarContent className="sm:hidden" justify="start">
         <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
-        <Input
-          classNames={{
-            base: "max-w-full sm:max-w-[10rem] h-10",
-            mainWrapper: "h-full",
-            input: "text-small",
-            inputWrapper: "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
-          }}
-          placeholder="Type to search..."
-          size="sm"
-          startContent={<SearchIcon size={18} />}
-          type="search"
-        />
+        <form className="space-x-4" onSubmit={handleSubmit}>
+          <Input
+            classNames={{
+              base: "max-w-full sm:max-w-[10rem] h-10",
+              mainWrapper: "h-full",
+              input: "text-small",
+              inputWrapper: "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
+            }}
+            placeholder="Type to search..."
+            size="sm"
+            startContent={<SearchIcon size={18} />}
+            type="search"
+            value={input} 
+              onChange={(e) => setInput(e.target.value)}
+          />
+        </form>
+        
       </NavbarContent>
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
@@ -53,18 +67,22 @@ export default function App() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Input
-            classNames={{
-              base: "max-w-full sm:max-w-[10rem] h-10",
-              mainWrapper: "h-full",
-              input: "text-small",
-              inputWrapper: "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
-            }}
-            placeholder="Type to search..."
-            size="sm"
-            startContent={<SearchIcon size={18} width={16} height={16} />}
-            type="search"
-          />
+          <form className="space-x-4" onSubmit={handleSubmit}>
+            <Input
+              classNames={{
+                base: "max-w-full sm:max-w-[10rem] h-10",
+                mainWrapper: "h-full",
+                input: "text-small",
+                inputWrapper: "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
+              }}
+              placeholder="Type to search..."
+              size="sm"
+              startContent={<SearchIcon size={18} />}
+              type="search"
+              value={input} 
+              onChange={(e) => setInput(e.target.value)}
+            />
+          </form>
         </NavbarItem>
         
       </NavbarContent>
