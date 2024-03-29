@@ -1,11 +1,9 @@
 "use client";
 
-import { Button } from '@nextui-org/react'
 import React, { useEffect, useState } from 'react'
 import { getTrendMovies } from '../api/movies'
-import { TRENDING } from '../api/constants';
+import { BASE_IMG_URL } from '../api/constants';
 import axios from "axios";
-import MovieCard from '../components/MovieCard';
 import {Card, CardHeader, CardBody, Image, CardFooter} from "@nextui-org/react";
 
 interface Movies {
@@ -40,25 +38,22 @@ export default function Trending() {
         return (
             <div className='m-6'>
                 <h2 className="text-2xl">Trending Movies</h2>
-                <div className="gap-2 grid grid-cols-2 sm:grid-cols-4">
+                <div className="gap-2 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 d-flex justify-center">
                     {movies.map((item) => (
                     // eslint-disable-next-line react/jsx-key
-                    <Card shadow="sm" isPressable onPress={() => console.log(`${item.id}`)}>
-                    <CardBody className="overflow-visible p-0">
-                        <Image
-                          shadow="sm"
-                          radius="lg"
-                          width="100%"
-                          alt={item.title}
-                          className="w-full object-cover h-[140px]"
-                          src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20210420155809/gfg-new-logo.png"
-                        />
-                    </CardBody>
-                    <CardFooter className="text-small justify-between">
-                        <b>{item.title}</b>
-                        <p className="text-default-500">{item.overview}</p>
-                    </CardFooter>
-                  </Card>
+                    <Card className="py-4 d-flex justify-center items-center justify-center">
+                        <CardBody className="overflow-visible py-2 d-flex justify-center items-center">
+                            <Image
+                                alt="Card background"
+                                className="object-cover rounded-xl d-flex"
+                                src={`${BASE_IMG_URL}/${item.poster_path}`}
+                                width={270}
+                            />
+                        </CardBody>
+                        <CardFooter className="pb-0 pt-2 px-4 flex-col items-center justify-center d-flex">
+                            <h4 className="font-bold text-large d-flex">{item.title}</h4>
+                        </CardFooter>
+                    </Card>
                     ))}
                 </div>
             </div>
