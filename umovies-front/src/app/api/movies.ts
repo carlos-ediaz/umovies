@@ -1,18 +1,17 @@
-export async function getTrendMovies() {
-    const url = 'https://api.themoviedb.org/3/trending/movie/day?language=en-US';
-    const options = {
-        method: 'GET',
-        headers: {
-            accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MzUwMmE4ZDdlYWI4NWM2ZWY4NGZmZDM2MzdlZDYyZiIsInN1YiI6IjY2MDRkZWRlOTU2NjU4MDE2MTdkZWE4YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.yO95rRycns4wz-jHxYpQE_7BIctTDKT9uaHevc1br8o'
-        }
-    };
+import axios from "axios";
+import { TRENDING } from "./constants";
 
-    try {
-        const response = await fetch(url, options);
-        const data = await response.json();
-        console.log(data);
-      } catch (err) {
-        console.error('error:' + err);
+export async function getTrendMovies() {
+  try {
+    const response = await axios.get(`${TRENDING}`, {
+      headers: {
+          'Authorization': `Bearer ${process.env.token}`
       }
+    });
+    const info = response.data.results;
+    return info
+  } catch (error) {
+    return Promise.reject(error)
+  }
+  
 }
