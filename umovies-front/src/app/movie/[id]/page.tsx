@@ -11,9 +11,9 @@ import {Chip} from "@nextui-org/react";
 
 
 export default function Movie() {
-  const params = useParams<{ id: any }>();
+  const params = useParams<{ id: string }>();
   const { id } =params;
-
+  let m_id: number = parseInt(id, 10);
   interface Movie {
     id: number;
     adult: boolean;
@@ -35,7 +35,7 @@ export default function Movie() {
 
     async function fetchInfo() {
         try {
-            const res = await getMovieInfo(id);
+            const res = await getMovieInfo(m_id);
             setMovie(res);
         } catch (error) {
             console.log(error)

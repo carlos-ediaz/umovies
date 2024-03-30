@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { getTrendMovies } from '../api/movies'
 import { BASE_IMG_URL } from '../api/constants';
-import {Card, CardHeader, CardBody, Image, CardFooter} from "@nextui-org/react";
+import {Card, CardBody, Image, CardFooter} from "@nextui-org/react";
 import { useRouter } from 'next/navigation';
 
 interface Movies {

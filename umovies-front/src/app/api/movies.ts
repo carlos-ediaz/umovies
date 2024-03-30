@@ -28,13 +28,15 @@ export async function getMovieInfo(id: number) {
     return Promise.reject(error)
   }
 }
-export async function getSearchMovies(query: string) {
+export async function getSearchMovies(query: string, page: number) {
   try {
-    console.log(SEARCH)
-    console.log(query)
-    const response = await axios.get(`${SEARCH}${query}&api_key=${process.env.api_key}`);
+    const response = await axios.get(`${SEARCH}${query}&page=${page}&api_key=${process.env.api_key}`);
     const info = response.data.results;
-    return info
+    const pages = response.data.total_pages;
+    return {
+      info,
+      pages
+    }
   } catch (error) {
     return Promise.reject(error)
   }

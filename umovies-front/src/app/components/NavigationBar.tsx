@@ -12,7 +12,7 @@ export default function NavigationBar() {
   const handleSubmit = (e:React.FormEvent) => {
     e.preventDefault();
     setInput("");
-    router.push(`/search/${input}`)
+    router.push(`/search/${input}?page=1`)
   }
 
   const menuItems = [
