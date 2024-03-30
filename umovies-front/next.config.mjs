@@ -25,6 +25,9 @@ const nextConfig = {
     token:
       'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MzUwMmE4ZDdlYWI4NWM2ZWY4NGZmZDM2MzdlZDYyZiIsInN1YiI6IjY2MDRkZWRlOTU2NjU4MDE2MTdkZWE4YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.yO95rRycns4wz-jHxYpQE_7BIctTDKT9uaHevc1br8o',
   },
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  },
   redirects() {
     return [
       {
