@@ -18,7 +18,6 @@ export default function Movie() {
     id: number;
     adult: boolean;
     title: string;
-    backdrop_path: string;
     poster_path: string;
     homepage: string;
     overview: string;
@@ -49,7 +48,9 @@ export default function Movie() {
             <Image
               alt="Card background"
               className="object-cover rounded-xl"
-              src={`${BASE_IMG_URL}/${movie.poster_path}`}
+              src={ movie.poster_path? 
+                `${BASE_IMG_URL}/${movie.poster_path}`
+              : "https://i.imgur.com/Z8tNeZO.jpeg"}
               width={270}
               height={270}
             />

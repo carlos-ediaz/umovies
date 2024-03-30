@@ -1,11 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['image.tmdb.org'],
+    domains: ['image.tmdb.org', 'drive.google.com'],
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'image.tmdb.org',
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'drive.google.com',
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.imgur.com',
         port: '',
       },
     ],

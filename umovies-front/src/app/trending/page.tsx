@@ -39,7 +39,9 @@ export default function Trending() {
                                     <Image
                                         alt="Card background"
                                         className="object-cover rounded-xl d-flex"
-                                        src={`${BASE_IMG_URL}${item.poster_path}`}
+                                        src={ item.poster_path? 
+                                            `${BASE_IMG_URL}/${item.poster_path}`
+                                          : "https://i.imgur.com/Z8tNeZO.jpeg"}
                                         width={270}
                                         height={270}
                                     />
