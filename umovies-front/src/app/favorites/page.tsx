@@ -8,6 +8,10 @@ import { BASE_IMG_URL } from '../api/constants';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function Favorites() {
+    let ss_id: any
+    if (typeof window !== 'undefined') {
+        ss_id = localStorage.getItem('session_id')
+    }
 
     interface Movies {
         id: number;
@@ -35,8 +39,7 @@ export default function Favorites() {
     }
 
     useEffect(() => {
-        const sessionId = localStorage.getItem("session_id");
-        fetchInfo(sessionId);
+        fetchInfo(ss_id);
     }, [])
 
 
