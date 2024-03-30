@@ -1,15 +1,28 @@
 "use client";
-
-import { useRouter } from "next/navigation";
-import { useParams } from "next/navigation";
-
+import {NextSeo} from 'next-seo';
 
 export default function Home() {
-  const params = useParams();
-  const {id} = params;
+  
   return (
     <>
-      <p>Home page ${id}</p>
+      <NextSeo 
+        title="UMovies: Search online movies"
+        description="Easily find and save your favorites movies"
+        openGraph={{
+          title: 'Search online movies',
+          description: 'Easily find and save your favorites movies',
+          images: [
+            {
+              url: 'https://i.imgur.com/Z8tNeZO.jpeg',
+              width: 720,
+              height: 720,
+              alt: 'Default image',
+              type: 'image/jpeg',
+            }
+          ],
+          siteName: 'UMovies',
+        }}
+      />
     </>
     
   );
