@@ -1,8 +1,8 @@
 "use client";
 
 import { BASE_IMG_URL } from '@/app/api/constants';
-import { getMovieInfo } from '@/app/api/movies';
-import { Card, CardBody, CardFooter } from '@nextui-org/react';
+import { addToFavorites, getMovieInfo, isFavorite, removeFromFavorites } from '@/app/api/movies';
+import { Button, Card, CardBody, CardFooter } from '@nextui-org/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
@@ -11,6 +11,8 @@ import {Chip} from "@nextui-org/react";
 
 
 export default function Movie() {
+  const [inFav, setInFav] = useState(false);
+  const ss_id: any = localStorage.getItem("session_id")!;
   const params = useParams<{ id: string }>();
   const { id } =params;
   let m_id: number = parseInt(id, 10);
@@ -29,8 +31,9 @@ export default function Movie() {
   const [movie, setMovie] = useState<Movie>();
 
     useEffect(() => {
-        fetchInfo();
-    }, [])
+      isInFavorites();
+      fetchInfo();
+    }, [movie])
 
     async function fetchInfo() {
         try {
@@ -39,6 +42,14 @@ export default function Movie() {
         } catch (error) {
             console.log(error)
         }
+    }
+    async function isInFavorites() {
+      try {
+        const res = await isFavorite(m_id, ss_id)
+        setInFav(res);
+      } catch (error) {
+        console.log(error)
+      }
     }
 
     if (movie) {
@@ -74,7 +85,22 @@ export default function Movie() {
               ))
             }
             </div>
-            
+            {
+              !inFav? (
+              <Button color="primary" onClick={() => {
+                addToFavorites(ss_id, m_id)
+                fetchInfo()}
+              }
+                >
+                Add to favorites
+              </Button>): 
+              (<Button color="danger" onClick={() => {
+                removeFromFavorites(ss_id, m_id)
+                fetchInfo()}
+              }>
+                Remove from favorites
+              </Button> )
+            }
           </CardFooter>
         </Card>
       )

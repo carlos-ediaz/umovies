@@ -94,7 +94,7 @@ export default function NavigationBar() {
               className="w-full"
               color="foreground"
               href={
-                item==="Home"? "/": `${item.toLocaleLowerCase()}`
+                item==="Home"? "/": `/${item.toLocaleLowerCase()}`
               }
               size="lg"
             >

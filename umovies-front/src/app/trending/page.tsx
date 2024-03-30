@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react'
-import { getTrendMovies } from '../api/movies'
+import { getSessionId, getTrendMovies } from '../api/movies'
 import { BASE_IMG_URL } from '../api/constants';
 import {Card, CardBody, Image, CardFooter} from "@nextui-org/react";
 import { useRouter } from 'next/navigation';
@@ -16,14 +16,22 @@ export default function Trending() {
     const [movies, setMovies] = useState<Movies[]>([]);
 
     useEffect(() => {
+        getAccounId();
         fetchInfo();
     }, [])
+
+    async function getAccounId() {
+        try {
+            await getSessionId()
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     async function fetchInfo() {
         try {
             const res = await getTrendMovies();
             setMovies(res);
-            console.log(res)
         } catch (error) {
             console.log(error)
         }

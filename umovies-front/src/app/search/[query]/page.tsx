@@ -25,6 +25,7 @@ export default function Search() {
 
     const [movies, setMovies] = useState<Movies[]>([]);
     const [nPages, setNPages] = useState<number>(1);
+    
     async function fetchInfo() {
         try {
             const{ info, pages} = await getSearchMovies(query, npage);
