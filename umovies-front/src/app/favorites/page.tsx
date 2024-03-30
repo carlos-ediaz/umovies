@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useContext, useEffect, useState } from 'react'
-import { getFavorites, getMovieInfo, getSessionId } from '../api/movies';
+import React, {  useEffect, useState } from 'react'
+import { getFavorites } from '../api/movies';
 import { Card, CardBody, CardFooter, Pagination } from '@nextui-org/react';
 import Image from 'next/image';
 import { BASE_IMG_URL } from '../api/constants';
@@ -14,7 +14,7 @@ export default function Favorites() {
         title: string;
         poster_path: string;
     }
-    const sessionId = localStorage.getItem("session_id");
+    
     const [favMovies, setFavMovies] = useState<Movies[]>([]);
     const [nPages, setNPages] = useState<number>(1);
 
@@ -22,10 +22,6 @@ export default function Favorites() {
     const page: string = searchParams.get('page')! ;
     const npage: number = parseInt(page);
     const router = useRouter();
-
-
-    localStorage.getItem("session_id")
-
 
     async function fetchInfo(sessionId: any) {
         try {
@@ -39,6 +35,7 @@ export default function Favorites() {
     }
 
     useEffect(() => {
+        const sessionId = localStorage.getItem("session_id");
         fetchInfo(sessionId);
     }, [])
 

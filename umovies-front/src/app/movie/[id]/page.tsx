@@ -12,7 +12,8 @@ import {Chip} from "@nextui-org/react";
 
 export default function Movie() {
   const [inFav, setInFav] = useState(false);
-  const ss_id: any = localStorage.getItem("session_id")!;
+  let ss_id: any;
+    ;
   const params = useParams<{ id: string }>();
   const { id } =params;
   let m_id: number = parseInt(id, 10);
@@ -31,6 +32,7 @@ export default function Movie() {
   const [movie, setMovie] = useState<Movie>();
 
     useEffect(() => {
+      ss_id=localStorage.getItem("session_id");
       isInFavorites();
       fetchInfo();
     }, [movie])
